@@ -1,13 +1,17 @@
-#ifndef Gamespace
-#define Gamespace
+#ifndef GAMESPACE_H
+#define GAMESPACE_H
 
 struct Gamespace {
     public:
-        Gamespace(int dim); //constructor for Gamespace
-        char** getBoard(); //returns the board
-        void printBoard(); //prints the board to console
-        bool dropChip(char player, int rowChosen); //sets the matrix[rowChosen][availableSpacesToDrop[rowChosen]] to player. Returns a bool for whether the win condition has been met
-        bool checkWin(int row, int col); //returns true if the new move at board[row][col] causes a player to win the game, false otherwise
+        Gamespace(); //constructor for Gamespace
+        //postcondition: prints the board to console
+        void printBoard();
+        //precondition: int possibleColChosen is the column that a player wants to drop a chip in
+        //postcondition: returns true if this is a valid move, false otherwise
+        bool checkValidMove(int possibleColChosen);
+        //precondition: player is either 'r' or 'b', colChosen is a valid index in availableSpacesToDrop
+        //postcondition: sets the matrix[rowChosen][availableSpacesToDrop[rowChosen]] to player. Returns a bool for whether the win condition has been met
+        bool dropChip(char player, int colChosen); 
     private:
         //board used for maintaining the gamespace.
             //n = no chip.
