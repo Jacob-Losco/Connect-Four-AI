@@ -17,7 +17,7 @@ Gamespace::Gamespace() {
 
 void Gamespace::printBoard() {
     cout << "BOARD: " << endl;
-    for(int i = 0; i < 6 * 2; i++) {
+    for(int i = 0; i < 6 * 3; i++) {
         cout << "_";
     }
     cout << endl;
@@ -33,7 +33,7 @@ void Gamespace::printBoard() {
         }
         cout << "|" << endl;
     }
-    for(int i = 0; i < 6 * 2; i++) {
+    for(int i = 0; i < 6 * 3; i++) {
         cout << "_";
     }
 }
