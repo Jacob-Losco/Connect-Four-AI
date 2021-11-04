@@ -16,10 +16,12 @@ Gamespace::Gamespace() {
 }
 
 void Gamespace::printBoard() {
-    cout << "BOARD: " << endl;
-    for(int i = 0; i < 6 * 3; i++) {
+    cout << "\nBOARD: " << endl << " ";
+    for(int i = 0; i < 6; i++)
+        cout << " " << i + 1 << " ";
+    cout << endl;
+    for(int i = 0; i < 6 * 3; i++)
         cout << "_";
-    }
     cout << endl;
     for(int i = 0; i < 6; i++) {
         cout << "|";
@@ -32,9 +34,6 @@ void Gamespace::printBoard() {
                 cout << BLUE << " X " << RESET;
         }
         cout << "|" << endl;
-    }
-    for(int i = 0; i < 6 * 3; i++) {
-        cout << "_";
     }
 }
 
@@ -55,14 +54,15 @@ bool Gamespace::dropChip(char player, int colChosen) {
             if((rowIndex >= 0 && rowIndex <= 5) && 
             (colIndex >= 0 && colIndex <= 5) &&
             board[rowIndex][colIndex] == player && 
-            (rowIndex != rowChosen && colIndex != colChosen)) {
-                int numConnected = 2; //the number of chips we have connected so far. Start with two, since we have the origonal dropped chip, and the surrounding one we found
+            (rowIndex != rowChosen || colIndex != colChosen)) {
+                int numConnected = 1; //the number of chips we have connected so far. Start with two, since we have the origonal dropped chip, and the surrounding one we found
                 //get the direction we have to step in to find the rest of the connection
-                int directionX = colIndex - colChosen; 
-                int directionY = rowIndex - rowChosen;
+                int directionY = colIndex - colChosen; 
+                int directionX = rowIndex - rowChosen;
                 //get the next space to check
                 int possibleConnectedSpaceRow = rowIndex + directionX;
                 int possibleConnectedSpaceCol = colIndex + directionY;
+                cout << possibleConnectedSpaceRow << " " << possibleConnectedSpaceCol << endl;
                 //while indices are valid and the space matches the rest of the connections
                 while((possibleConnectedSpaceCol >= 0 && possibleConnectedSpaceCol <= 5) &&
                 (possibleConnectedSpaceRow >= 0 && possibleConnectedSpaceRow <= 5) && 
