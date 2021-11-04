@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 using namespace std;
 
 #include "Gamespace.h"
@@ -11,7 +12,7 @@ int main() {
     cout << "Welcome to Connect Four!" << endl;
     g -> printBoard();
     while(!finished) {
-        if(numTurns > 36) {
+        if(numTurns == 36) {
             player = "Tie";
             finished = true;
             break;
@@ -21,12 +22,18 @@ int main() {
         bool chosenColValid = false;
         while(!chosenColValid) {
             cout << player << ", choose a number 1-6 for the column you want to drop a chip into: ";
-            cin >> chosenCol;
-            if(g -> checkValidMove(chosenCol - 1)) {
+            if(!(cin >> chosenCol)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Bad Input. Please enter a number... " << endl;
+            }
+            else if(chosenCol < 1 && chosenCol > 6)
+                cout << "Invalid column number. Please enter a number between 1 and 6... " << endl;
+            else if(g -> checkValidMove(chosenCol - 1)) {
                 chosenColValid = true;
                 break;
             }
-            cout << "Invalid move. This column is full... " << endl;
+            cout << "Invalid move. This column is already full... " << endl;
         }
         finished = g -> dropChip(numTurns % 2 == 0 ? 'r' : 'b', chosenCol - 1);
         g -> printBoard();

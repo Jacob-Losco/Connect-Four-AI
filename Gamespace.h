@@ -10,7 +10,7 @@ struct Gamespace {
         //postcondition: returns true if this is a valid move, false otherwise
         bool checkValidMove(int possibleColChosen);
         //precondition: player is either 'r' or 'b', colChosen is a valid index in availableSpacesToDrop
-        //postcondition: sets the matrix[rowChosen][availableSpacesToDrop[rowChosen]] to player. Returns a bool for whether the win condition has been met
+        //postcondition: sets the matrix[rowChosen][availableSpacesToDrop[rowChosen]] to player. Returns a bool for whether a win condition has been met
         bool dropChip(char player, int colChosen); 
     private:
         //board used for maintaining the gamespace.

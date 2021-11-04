@@ -75,7 +75,7 @@ bool Gamespace::dropChip(char player, int colChosen) {
                     possibleConnectedSpaceRow += directionX;
                     possibleConnectedSpaceCol += directionY;
                 }
-                //reverse the direction incase some the connection is in the opposite direction
+                //reverse the direction in case some of the connection is in the opposite direction
                 directionX = directionX * -1;
                 directionY = directionY * -1;
                 //get the next space in the opposite direction to check
