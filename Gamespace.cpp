@@ -3,6 +3,7 @@ using namespace std;
 
 #include "Gamespace.h"
 
+//definitions used to color and reset color for the chips when printing
 #define RED "\033[31m"
 #define BLUE "\033[34m"
 #define RESET "\033[0m"
@@ -20,9 +21,6 @@ void Gamespace::printBoard() {
     for(int i = 0; i < 6; i++)
         cout << " " << i + 1 << " ";
     cout << endl;
-    for(int i = 0; i < 6 * 3; i++)
-        cout << "_";
-    cout << endl;
     for(int i = 0; i < 6; i++) {
         cout << "|";
         for(int j = 0; j < 6; j++) {
@@ -38,7 +36,7 @@ void Gamespace::printBoard() {
 }
 
 bool Gamespace::checkValidMove(int possibleColChosen) {
-    return availableSpacesToDrop[possibleColChosen] != -1;
+    return possibleColChosen >= 0 && possibleColChosen <= 5 && availableSpacesToDrop[possibleColChosen] != -1;
 }
 
 bool Gamespace::dropChip(char player, int colChosen) {
@@ -48,24 +46,24 @@ bool Gamespace::dropChip(char player, int colChosen) {
 
     //set the player char as the new value for this space
     board[rowChosen][colChosen] = player;
+
     //check for a win condition
     for(int rowIndex = rowChosen - 1; rowIndex <= rowChosen + 1; rowIndex++) {
         for(int colIndex = colChosen - 1; colIndex <= colChosen + 1; colIndex++) {
-            if((rowIndex >= 0 && rowIndex <= 5) && 
+            if((rowIndex >= 0 && rowIndex <= 5) &&
             (colIndex >= 0 && colIndex <= 5) &&
-            board[rowIndex][colIndex] == player && 
+            board[rowIndex][colIndex] == player &&
             (rowIndex != rowChosen || colIndex != colChosen)) {
-                int numConnected = 1; //the number of chips we have connected so far. Start with two, since we have the origonal dropped chip, and the surrounding one we found
+                int numConnected = 1; //the number of chips we have connected so far.
                 //get the direction we have to step in to find the rest of the connection
-                int directionY = colIndex - colChosen; 
+                int directionY = colIndex - colChosen;
                 int directionX = rowIndex - rowChosen;
                 //get the next space to check
                 int possibleConnectedSpaceRow = rowIndex + directionX;
                 int possibleConnectedSpaceCol = colIndex + directionY;
-                cout << possibleConnectedSpaceRow << " " << possibleConnectedSpaceCol << endl;
-                //while indices are valid and the space matches the rest of the connections
+                //while indices are valid and the space matches the rest of the connection
                 while((possibleConnectedSpaceCol >= 0 && possibleConnectedSpaceCol <= 5) &&
-                (possibleConnectedSpaceRow >= 0 && possibleConnectedSpaceRow <= 5) && 
+                (possibleConnectedSpaceRow >= 0 && possibleConnectedSpaceRow <= 5) &&
                 board[possibleConnectedSpaceRow][possibleConnectedSpaceCol] == player) {
                     numConnected++;
                     //If we have found 4 connected chips, return true
@@ -82,7 +80,7 @@ bool Gamespace::dropChip(char player, int colChosen) {
                 possibleConnectedSpaceRow = rowIndex + directionX;
                 possibleConnectedSpaceCol = colIndex + directionY;
                 while((possibleConnectedSpaceCol >= 0 && possibleConnectedSpaceCol <= 5) &&
-                (possibleConnectedSpaceRow >= 0 && possibleConnectedSpaceRow <= 5) && 
+                (possibleConnectedSpaceRow >= 0 && possibleConnectedSpaceRow <= 5) &&
                 board[possibleConnectedSpaceRow][possibleConnectedSpaceCol] == player) {
                     numConnected++;
                     if(numConnected >= 4)
