@@ -4,12 +4,23 @@ using namespace std;
 #include "Gamespace.h"
 
 int main() {
-    Gamespace* g = new Gamespace();
+    Gamespace* g;
     int numTurns = 0;
+    int numRows, numCols;
     bool finished;
     string player;
 
     cout << "Welcome to Connect Four!" << endl;
+    do {
+      cout << "Please enter the number of rows for the board: ";
+      cin >> numRows;
+      cout << "Please enter the number of columns for the board ";
+      cin >> numCols;
+      if(numRows < 4 && numCols < 4)
+        cout << "Invalid input. Make sure the number of rows and colums are greater than four..." << endl;
+    } while(numRows < 4 && numCols < 4);
+
+    g = new Gamespace(numRows, numCols);
     g -> printBoard();
     while(!finished) {
         if(numTurns == 36) {
