@@ -14,4 +14,4 @@ bool Chip::getIsAI() { return isAI; }
 
 bool Chip::getIsSet() { return isSet; }
 
-void Chip::toggleIsSet() { isSet = isSet ? false : true; }
+void Chip::toggleIsSet(bool is) { isSet = is; }

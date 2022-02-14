@@ -5,9 +5,9 @@ struct Chip {
     public:
       Chip(); //default constructor for Chip
       Chip(bool ia); //parameterized constructor for Chip
-      bool getIsAI();
-      bool getIsSet();
-      void toggleIsSet();
+      bool getIsAI(); //getter for isAI
+      bool getIsSet(); //getter of isSet
+      void toggleIsSet(bool is); //setter for isSet
 
     private:
       bool isAI; //true if the chip is the AIs chip, false otherwise
